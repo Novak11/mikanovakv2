@@ -6,25 +6,26 @@ import { cn } from "@/app/lib/utils";
 import { Loader2 } from "lucide-react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2",
+  "inline-flex items-center justify-center gap-2 font-bold transition-all duration-300 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-950 uppercase tracking-wider",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-lg shadow-accent-500/25 hover:shadow-xl hover:shadow-accent-500/30 hover:-translate-y-0.5 active:translate-y-0 focus:ring-accent-500",
+          "bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/30 hover:shadow-xl hover:shadow-purple-500/40 hover:-translate-y-1 hover:scale-105 active:scale-100 focus:ring-cyan-500 rounded-full",
         secondary:
-          "bg-transparent border-2 border-primary-900 text-primary-900 hover:bg-primary-900 hover:text-white focus:ring-primary-900",
+          "bg-transparent border-2 border-cyan-500 text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 focus:ring-cyan-500 rounded-full",
         ghost:
-          "bg-transparent text-primary-700 hover:bg-primary-100 focus:ring-primary-500",
+          "bg-white/5 text-primary-300 hover:bg-white/10 hover:text-white focus:ring-primary-500 rounded-xl backdrop-blur-sm",
         outline:
-          "bg-transparent border border-primary-300 text-primary-700 hover:border-primary-500 focus:ring-primary-500",
-        link: "bg-transparent text-accent-600 underline-offset-4 hover:underline focus:ring-accent-500 p-0",
+          "bg-transparent border border-primary-700 text-primary-400 hover:border-purple-500 hover:text-purple-400 focus:ring-purple-500 rounded-xl",
+        link: "bg-transparent text-cyan-400 underline-offset-4 hover:underline hover:text-cyan-300 focus:ring-cyan-500 p-0",
+        glow: "bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-400 before:to-purple-400 before:opacity-0 hover:before:opacity-100 before:transition-opacity hover:shadow-[0_0_30px_rgba(6,182,212,0.5)]",
       },
       size: {
-        sm: "text-sm px-4 py-2 rounded-md",
-        md: "text-base px-6 py-3 rounded-lg",
-        lg: "text-lg px-8 py-4 rounded-lg",
-        icon: "p-2 rounded-lg",
+        sm: "text-xs px-5 py-2.5 rounded-full",
+        md: "text-sm px-7 py-3.5 rounded-full",
+        lg: "text-base px-10 py-5 rounded-full",
+        icon: "p-3 rounded-xl",
       },
       fullWidth: {
         true: "w-full",
@@ -72,7 +73,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           <>
             {leftIcon}
-            {children}
+            <span className="relative z-10">{children}</span>
             {rightIcon}
           </>
         )}

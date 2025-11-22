@@ -77,8 +77,12 @@ export function Stats() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-16 bg-accent-500">
-      <Container>
+    <section className="py-20 relative overflow-hidden">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500" />
+      <div className="absolute inset-0 bg-primary-950/20 backdrop-blur-sm" />
+
+      <Container className="relative">
         <div
           ref={ref}
           className="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-16"
@@ -86,23 +90,29 @@ export function Stats() {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1, ease: [0.34, 1.56, 0.64, 1] }}
               className="text-center"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-white/20 mb-4">
-                <stat.icon className="w-7 h-7 text-white" />
-              </div>
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">
+              <motion.div
+                whileHover={{ rotate: 360, scale: 1.1 }}
+                transition={{ duration: 0.6 }}
+                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm mb-5"
+              >
+                <stat.icon className="w-8 h-8 text-white" />
+              </motion.div>
+              <div className="text-5xl md:text-6xl font-extrabold text-white mb-2 tracking-tight">
                 <AnimatedCounter
                   value={stat.value}
                   suffix={stat.suffix}
                   isInView={isInView}
                 />
               </div>
-              <div className="text-white/80 font-medium">{stat.label}</div>
+              <div className="text-white/80 font-medium uppercase tracking-wider text-sm">
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </div>

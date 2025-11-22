@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 import { cn } from "@/app/lib/utils";
 import { navigation } from "@/app/lib/constants";
 
@@ -9,7 +10,7 @@ export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="hidden lg:flex items-center gap-8">
+    <nav className="hidden lg:flex items-center gap-1">
       {navigation.map((item) => {
         const isActive = pathname === item.href;
         return (
@@ -17,15 +18,17 @@ export function Navigation() {
             key={item.name}
             href={item.href}
             className={cn(
-              "text-sm font-medium transition-colors duration-200 relative py-2",
-              isActive
-                ? "text-accent-600"
-                : "text-primary-700 hover:text-primary-900"
+              "relative px-4 py-2 text-sm font-medium transition-all duration-300",
+              isActive ? "text-cyan-400" : "text-primary-300 hover:text-white"
             )}
           >
-            {item.name}
+            <span className="relative z-10">{item.name}</span>
             {isActive && (
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent-500 rounded-full" />
+              <motion.div
+                layoutId="navbar-indicator"
+                className="absolute inset-0 rounded-lg bg-white/5 border border-cyan-500/30"
+                transition={{ type: "spring", duration: 0.5 }}
+              />
             )}
           </Link>
         );
